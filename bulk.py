@@ -36,7 +36,7 @@ def getSystem(localhost,version,comunidad,puerto):
 
 
 
-print(getSystem('192.168.0.16',1,'comunidadASR',161))
+print(getSystem('192.168.1.70',1,'comunidadASR',161))
 
 print(getOidMulticast('localhost',1,'comunidadASR',161))
 
