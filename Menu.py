@@ -48,11 +48,7 @@ class Menu:
                 print('*',i[0])
             hostname = input('Introduce el nombre del hostname:')
             hostname = Agente.getAgente(hostname)
-            Monitor.graph(hostname[0],'inmulticast','Paquetes multicast que ha recibido', 'Paquetes')
-            Monitor.graph(hostname[0], 'inip', 'Paquetes recibidos exitosamente, entregados a protocolos IPv4', 'Paquetes')
-            Monitor.graph(hostname[0], 'icmpecho', 'Mensajes de respuesta ICMP ', 'Mensajes')
-            Monitor.graph(hostname[0], 'tcpsegsent', 'Segmentos enviados', 'Segmentos')
-            Monitor.graph(hostname[0], 'udpin', 'Datagramas recibidos que no pudieron ser entregados', 'Datagramas')
+            
             r = Reporte(hostname)
             r.CrearReporte()
             print("Se ha creado exitosamente el Reporte del hostname:",hostname[0])
@@ -97,7 +93,7 @@ class Menu:
                     print('Estado del Agente:',estado)
                     self.host_disponibles.append(i)
                     print('**Lista de Interfaces**')
-                    for interfaz in range(1,int(numero_interfaces)+1):
+                    for interfaz in range(1,int(numero_interfaces)<5):
 
                         descripcion = str(consulta(i[0],i[1],i[2],i[3],INFORMACION_INTERFAZ+str(interfaz)))
                         interfaz_estado = int(consulta(i[0],i[1],i[2],i[3],ESTADO_INTERFAZ+str(interfaz)))
@@ -106,13 +102,13 @@ class Menu:
                         print('No:',interfaz,descripcion,'-Estado:',interfaz_estado)
         else:
             print('No hay ningun Host dado de alta')
-        print(self.host_disponibles)
+        #print(self.host_disponibles)
         m = Monitor(self.host_disponibles)
         m.CrearCarpetas()
         m.CrearRRD()
         hilo = threading.Thread(target=m.Update,)
         hilo2 = threading.Thread(target=Menu.Opciones,args=(self.host_disponibles,),)
-        Menu.Opciones(self.host_disponibles)
+        #Menu.Opciones(self.host_disponibles)
         hilo.start()
         hilo2.start()
         

@@ -20,6 +20,10 @@ class Reporte:
         c = canvas.Canvas(f'{self.hostname}/{self.hostname}-Reporte.pdf')
         
         text = c.beginText(10,830)
+        text.textLine(f"Administracion en Servicios de Red \n Practica1")
+        c.drawText(text)
+        text.textLine(f"Diaz Zamora Erick \n Boleta:2019630396 \n 4CM13")
+        c.drawText(text)
         sistema = t[t.find('=')+1:]
         sistema = sistema.split(' ')
         imagen = 'Windows' if 'Windows' in sistema else 'Linux'
@@ -41,7 +45,7 @@ class Reporte:
         text = c.beginText(10,755)
         tiempo = str(Consulta(self.hostname,self.version,self.comunidad,self.puerto,'1.3.6.1.2.1.1.3.0'))
         tiempo = tiempo[tiempo.find('=')+1:]
-        tiempo = int(tiempo)/360000
+        tiempo = int(tiempo)/1
         text.textLine(f'Tiempo de actividad desde el último reinicio: {tiempo}')
         c.drawText(text)
         text = c.beginText(10,743)
@@ -51,6 +55,8 @@ class Reporte:
         text.textLine(f'Direcccion IP: {self.hostname}')
         c.drawText(text)
         text = c.beginText(10,710)
+        text.textLine(f'Paquetes multicast que ha recibido una interfaz ')
+        c.drawText(text)
         
         c.save()
 

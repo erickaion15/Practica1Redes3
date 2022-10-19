@@ -13,7 +13,7 @@ class Agente:
         return f'{self.hostname}-{self.comunidad}'
 
     def addAgente(self):
-        conexion=sqlite3.connect("Agentes.sql")
+        conexion=sqlite3.connect("Agentes.db")
         try:
             conexion.execute(f'''
             CREATE TABLE IF NOT EXISTS agente
@@ -36,7 +36,7 @@ class Agente:
     
 
     def deleteAgente(hostname):
-        conexion=sqlite3.connect("Agentes.sql",timeout=10)
+        conexion=sqlite3.connect("Agentes.db",timeout=10)
         
         try:
             conexion.execute(f'''
@@ -49,7 +49,7 @@ class Agente:
         conexion.close()
 
     def getAgentes():
-        conexion=sqlite3.connect("Agentes.sql",timeout=10)
+        conexion=sqlite3.connect("Agentes.db",timeout=10)
         agentes = []
         try:
             cursor=conexion.execute("SELECT * FROM agente;")
@@ -61,7 +61,7 @@ class Agente:
         return agentes
 
     def getAgente(hostname):
-        conexion=sqlite3.connect("Agentes.sql",timeout=10)
+        conexion=sqlite3.connect("Agentes.db",timeout=10)
         agente = []
         try:
             cursor=conexion.execute(f"SELECT * FROM agente where hostname = '{hostname}';")
